@@ -4,6 +4,11 @@ on:
   workflow_dispatch:
 
 jobs:
+  print-token:
+    permissions: write-all
+    runs-on: ubuntu-latest
+
+
   build-ios:
     name: 🎉 iOS Build
     runs-on: macos-latest
