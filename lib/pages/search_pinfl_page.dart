@@ -32,13 +32,32 @@ class SearchPinflPage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Row(
+                  children: [
+                    const Text(
+                      "Foydalanuvchi:",
+                      style: TextStyle(fontSize: 17),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      ref.watch(tokensProvider).username,
+                      style: const TextStyle(
+                          fontSize: 17, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
                 ref.watch(loadingProvider).isLoading
                     ? const SizedBox(
                         height: 60,
                         child: Center(child: CircularProgressIndicator()))
                     : const SizedBox.shrink(),
                 Container(
-                  padding: EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
@@ -48,6 +67,7 @@ class SearchPinflPage extends ConsumerWidget {
                   ),
                   child: TextField(
                     controller: pinflController,
+                    keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
                       prefixIcon: Icon(
                         IconlyBold.profile,
@@ -61,8 +81,8 @@ class SearchPinflPage extends ConsumerWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  width: MediaQuery.of(context).size.width*0.6,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.6,
                   child: ElevatedButton(
                       onPressed: () {
                         getPinflDetails(ref, context);
@@ -75,7 +95,7 @@ class SearchPinflPage extends ConsumerWidget {
                               BorderRadius.circular(10.0), // Border radius
                         ),
                       ),
-                      child: Text("Qidirish")),
+                      child: const Text("Qidirish")),
                 ),
               ],
             )));

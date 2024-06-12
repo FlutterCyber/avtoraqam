@@ -1,14 +1,13 @@
+import 'package:avtoraqam/pages/widgets/boshqa_shaxs_widget.dart';
 import 'package:avtoraqam/pages/widgets/jismoniy_shaxs_widget.dart';
 import 'package:avtoraqam/pages/widgets/tab_item_widget.dart';
 import 'package:avtoraqam/pages/widgets/yuridik_shaxs_widget.dart';
-import 'package:avtoraqam/providers/riverpod.dart';
 import 'package:avtoraqam/services/car_data_service.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
+
+import '../providers/riverpod.dart';
 
 class HomePage extends ConsumerWidget {
   static const String id = "home_page";
@@ -32,6 +31,9 @@ class HomePage extends ConsumerWidget {
   TextEditingController yuridikNumber2Controller = TextEditingController();
   TextEditingController yuridikNumber3Controller = TextEditingController();
   TextEditingController yuridikLettersController = TextEditingController();
+
+  /// boshqa raqamlar
+  TextEditingController numberController = TextEditingController();
 
   void getCarDataJismoniy(
     WidgetRef ref,
@@ -70,16 +72,30 @@ class HomePage extends ConsumerWidget {
     carDataService.getCarData();
   }
 
+  void getCarDataBoshqa(
+    WidgetRef ref,
+    BuildContext context,
+    String numberType,
+  ) {
+    CarDataService carDataService = CarDataService.boshqa(
+      ref: ref,
+      context: context,
+      numberType: 'boshqa',
+      boshqaCarNumber: numberController.text.trim(),
+    );
+    carDataService.getCarData();
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return DefaultTabController(
-        length: 2,
+        length: 3,
         child: Form(
           child: Scaffold(
               drawer: const Drawer(),
               appBar: AppBar(
                 iconTheme: const IconThemeData(color: Colors.white),
-                backgroundColor: Color(0xff427D9D),
+                backgroundColor: const Color(0xff427D9D),
                 title: const Text(
                   "Avtoraqam",
                   style: TextStyle(color: Colors.white),
@@ -89,8 +105,25 @@ class HomePage extends ConsumerWidget {
               body: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      Row(
+                        children: [
+                          const Text(
+                            "Foydalanuvchi:",
+                            style: TextStyle(fontSize: 17),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            ref.watch(tokensProvider).username,
+                            style: const TextStyle(
+                                fontSize: 17, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                      Expanded(child: Container()),
                       PreferredSize(
                         preferredSize: const Size.fromHeight(40),
                         child: ClipRRect(
@@ -98,7 +131,7 @@ class HomePage extends ConsumerWidget {
                               const BorderRadius.all(Radius.circular(10)),
                           child: Container(
                             height: 40,
-                            margin: const EdgeInsets.symmetric(horizontal: 20),
+                            // margin: const EdgeInsets.symmetric(horizontal: 5),
                             decoration: const BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
@@ -120,6 +153,9 @@ class HomePage extends ConsumerWidget {
                                 ),
                                 TabItem(
                                   title: 'Yuridik',
+                                ),
+                                TabItem(
+                                  title: 'Boshqa',
                                 ),
                               ],
                             ),
@@ -163,8 +199,12 @@ class HomePage extends ConsumerWidget {
                                     yuridikLettersController,
                                 getCarData: getCarDataYuridik,
                               ),
-                              // jismoniyShaxs(context, ref),
-                              // yuridikShaxs(context, ref),
+                              BoshqaShaxsWidget(
+                                context: context,
+                                ref: ref,
+                                numberController: numberController,
+                                getCarData: getCarDataBoshqa,
+                              ),
                             ],
                           ),
                         ),
@@ -172,7 +212,7 @@ class HomePage extends ConsumerWidget {
                       const SizedBox(
                         height: 30,
                       ),
-
+                      Expanded(child: Container()),
                     ],
                   ))),
         ));

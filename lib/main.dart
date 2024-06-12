@@ -1,11 +1,11 @@
 import 'package:avtoraqam/pages/auth_pages/login_page.dart';
 import 'package:avtoraqam/pages/auth_pages/sign_up_page.dart';
 import 'package:avtoraqam/pages/bottom_nav_bar.dart';
-import 'package:avtoraqam/pages/car_details_page.dart';
 import 'package:avtoraqam/pages/home_page.dart';
 import 'package:avtoraqam/pages/pinfl_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 
 void main() {
   runApp(

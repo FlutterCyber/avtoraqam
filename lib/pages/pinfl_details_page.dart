@@ -1,8 +1,5 @@
-import 'dart:ui';
-import 'package:avtoraqam/pages/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:iconly/iconly.dart';
 import 'package:logger/logger.dart';
 import '../providers/riverpod.dart';
 
@@ -96,6 +93,106 @@ class PinflDetailsPage extends ConsumerWidget {
                         width: 10,
                       ),
                       Text(
+                        "Tugilgan sana:",
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w500),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: const Color(0xffDDF2FD),
+                    ),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              ref.read(pinflDetailsProvider).birthDate,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              maxLines: 5,
+                              // Allows text to wrap into two lines if needed
+                              overflow: TextOverflow
+                                  .ellipsis, // Adds ellipsis if the text overflows
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Row(
+                    children: [
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "Jinsi:",
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w500),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: const Color(0xffDDF2FD),
+                    ),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              ref.read(pinflDetailsProvider).sex,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              maxLines: 5,
+                              // Allows text to wrap into two lines if needed
+                              overflow: TextOverflow
+                                  .ellipsis, // Adds ellipsis if the text overflows
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Row(
+                    children: [
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
                         "PINFL:",
                         style: TextStyle(
                             fontSize: 17, fontWeight: FontWeight.w500),
@@ -106,11 +203,11 @@ class PinflDetailsPage extends ConsumerWidget {
                     width: 15,
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 10, right: 10),
+                    padding: const EdgeInsets.only(left: 10, right: 10),
                     height: 60,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Color(0xffDDF2FD),
+                      color: const Color(0xffDDF2FD),
                     ),
                     child: Center(
                         child: Row(
@@ -148,33 +245,85 @@ class PinflDetailsPage extends ConsumerWidget {
                     width: 15,
                   ),
                   Container(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: const Color(0xffDDF2FD),
                     ),
                     child: Center(
-                        child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            ref.read(pinflDetailsProvider).phoneNumber,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              ref.read(pinflDetailsProvider).phoneNumber,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              maxLines: 5,
+                              // Allows text to wrap into two lines if needed
+                              overflow: TextOverflow
+                                  .ellipsis, // Adds ellipsis if the text overflows
                             ),
-                            maxLines: 5,
-                            // Allows text to wrap into two lines if needed
-                            overflow: TextOverflow
-                                .ellipsis, // Adds ellipsis if the text overflows
                           ),
-                        ),
-                      ],
-                    )),
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),
+              const SizedBox(
+                height: 15,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Row(
+                    children: [
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "Address:",
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w500),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: const Color(0xffDDF2FD),
+                    ),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              ref.read(pinflDetailsProvider).address,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              maxLines: 5,
+                              // Allows text to wrap into two lines if needed
+                              overflow: TextOverflow
+                                  .ellipsis, // Adds ellipsis if the text overflows
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
             ],
           ),
         ]),

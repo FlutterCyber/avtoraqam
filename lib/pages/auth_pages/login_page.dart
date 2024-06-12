@@ -1,7 +1,5 @@
 import 'package:avtoraqam/pages/bottom_nav_bar.dart';
-import 'package:avtoraqam/pages/home_page.dart';
 import 'package:avtoraqam/providers/riverpod.dart';
-import 'package:avtoraqam/services/request.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
@@ -33,14 +31,15 @@ class LoginPage extends ConsumerWidget {
       String accessToken = responseMap["responseBody"]["data"]["access_token"];
       String refreshToken =
           responseMap["responseBody"]["data"]["refresh_token"];
-      ref
-          .read(tokensProvider)
-          .setTokens(accessToken: accessToken, refreshToken: refreshToken);
+      ref.read(tokensProvider).setTokens(
+          accessToken: accessToken,
+          refreshToken: refreshToken,
+          username: username);
       Navigator.pushReplacementNamed(context, BottomNavBar.id);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          backgroundColor: Color(0xffDDF2FD),
+          backgroundColor: const Color(0xffDDF2FD),
           content: Text(
             'Server error: ${responseMap["statusCode"]}',
             style: const TextStyle(
@@ -48,7 +47,7 @@ class LoginPage extends ConsumerWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
         ),
       );
     }
@@ -76,7 +75,7 @@ class LoginPage extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        'Sign In',
+                        'Kirish',
                         style: TextStyle(
                             color: Colors.grey[700],
                             fontSize: 26,
@@ -103,19 +102,6 @@ class LoginPage extends ConsumerWidget {
                 ),
                 const SizedBox(height: 10),
 
-                /// forgot password?
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        'Forgot Password?',
-                        style: TextStyle(color: Colors.grey[600]),
-                      ),
-                    ],
-                  ),
-                ),
                 const SizedBox(height: 25),
                 GestureDetector(
                   onTap: () {

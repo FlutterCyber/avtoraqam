@@ -34,7 +34,7 @@ class PinflDataService {
       int? statusCode = await sendPinfl(ref, pinfl);
       if (statusCode == 200 || statusCode == 201) {
         Map<String, dynamic>? response = await NetworkService.GET(
-            NetworkService.API_GET_PINFL, pinflModel.toJson());
+            NetworkService.API_GET_FULL_INFO, pinflModel.toJson());
         if (response?["statusCode"] == 200 || response?["statusCode"] == 201) {
           logger.e(response?["responseBody"]);
           PinflDetailsModel pinflDetailsModel =
@@ -45,7 +45,7 @@ class PinflDataService {
 
           /// tekshirish kk
           logger.i(
-              "***** ${pinflDetailsModel!.fio}\n${pinflDetailsModel!.pinfl}\n${pinflDetailsModel!.phoneNumber} ");
+              "***** ${pinflDetailsModel.fio}\n${pinflDetailsModel.pinfl}\n${pinflDetailsModel.phoneNumber} ");
 
           //ref.read(...) circular progress indicatorni o'chirish uchun kk
           ref.read(loadingProvider).changeToFalse();

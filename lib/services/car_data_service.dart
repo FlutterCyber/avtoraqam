@@ -1,5 +1,4 @@
 import 'package:avtoraqam/pages/widgets/my_snackbar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
@@ -24,6 +23,9 @@ class CarDataService {
   String yuridikNumber2 = "";
   String yuridikNumber3 = "";
   String yuridikLastLetters = "";
+
+  ///
+  String boshqaCarNumber = "";
 
   ///
   WidgetRef ref;
@@ -55,6 +57,13 @@ class CarDataService {
     required this.yuridikLastLetters,
   });
 
+  CarDataService.boshqa({
+    required this.ref,
+    required this.context,
+    required this.numberType,
+    required this.boshqaCarNumber,
+  });
+
   String getNumberJismoniy() {
     String gatheredCarNumber = jismoniyRegionNumber +
         jismoniyFirstLetter +
@@ -76,13 +85,22 @@ class CarDataService {
     return gatheredCarNumber;
   }
 
+  String getNumberBoshqa() {
+    String gatheredCarNumber = boshqaCarNumber;
+    logger.e(gatheredCarNumber);
+    return gatheredCarNumber;
+  }
+
   Future<int?> sendText() async {
     String number = "";
     if (numberType == "jismoniy") {
       number = getNumberJismoniy();
     } else if (numberType == "yuridik") {
       number = getNumberYuridik();
+    } else if (numberType == "boshqa") {
+      number = getNumberBoshqa();
     }
+
     if (number.isNotEmpty) {
       NetworkService.accessToken = ref.read(tokensProvider).accessToken;
       CarNumberModel carNumberModel = CarNumberModel(car: number);
@@ -102,7 +120,10 @@ class CarDataService {
       number = getNumberJismoniy();
     } else if (numberType == "yuridik") {
       number = getNumberYuridik();
+    } else if (numberType == "boshqa") {
+      number = getNumberBoshqa();
     }
+
     NetworkService.accessToken = ref.read(tokensProvider).accessToken;
     CarNumberModel carNumberModel = CarNumberModel(car: number);
     int? statusCode = await sendText();
@@ -115,7 +136,6 @@ class CarDataService {
         logger.e(response?["responseBody"]);
         List lst = response?["responseBody"];
         if (response?["responseBody"][0]["fio"] != null) {
-
           CarDetailsModel carDetailsModel = CarDetailsModel.fromJson(lst.first);
           //ref.read(...) circular progress indicatorni yoqish uchun kk
           ref.read(loadingProvider).changeToFalse();

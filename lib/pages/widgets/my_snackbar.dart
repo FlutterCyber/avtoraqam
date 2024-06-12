@@ -4,7 +4,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> mySnackbar(
     {required BuildContext context, required String message}) {
   return ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      backgroundColor: Color(0xffDDF2FD),
+      backgroundColor: const Color(0xffDDF2FD),
       content: Text(
         message,
         style: const TextStyle(
@@ -12,7 +12,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> mySnackbar(
           fontWeight: FontWeight.bold,
         ),
       ),
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
     ),
   );
 }

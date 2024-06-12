@@ -1,15 +1,9 @@
-import 'dart:ui';
-import 'package:avtoraqam/pages/bottom_nav_bar.dart';
 import 'package:avtoraqam/services/clipboard_service.dart';
 import 'package:avtoraqam/services/pinfl_data_service.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconly/iconly.dart';
 import 'package:logger/logger.dart';
-
 import '../models/car_details_model.dart';
 import '../providers/riverpod.dart';
 
@@ -83,7 +77,7 @@ class CarDetailsPage extends ConsumerWidget {
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                               ),
-                              maxLines: 2,
+                              maxLines: 5,
                               // Allows text to wrap into two lines if needed
                               overflow: TextOverflow
                                   .ellipsis, // Adds ellipsis if the text overflows
@@ -117,11 +111,11 @@ class CarDetailsPage extends ConsumerWidget {
                     width: 15,
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 10, right: 10),
+                    padding: const EdgeInsets.only(left: 10, right: 10),
                     height: 60,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Color(0xffDDF2FD),
+                      color: const Color(0xffDDF2FD),
                     ),
                     child: Center(
                         child: Row(
@@ -141,14 +135,15 @@ class CarDetailsPage extends ConsumerWidget {
                             },
                             icon: const Icon(Icons.copy)),
                         IconButton(
-                            onPressed: () {
-                              PinflDataService.getPinflDetails(
-                                  ref, context, carDetailsModel.pinfl);
-                            },
-                            icon: const Icon(
-                              IconlyBold.info_square,
-                              color: Colors.green,
-                            ))
+                          onPressed: () {
+                            PinflDataService.getPinflDetails(
+                                ref, context, carDetailsModel.pinfl);
+                          },
+                          icon: const Icon(
+                            IconlyBold.info_square,
+                            color: Colors.green,
+                          ),
+                        ),
                       ],
                     )),
                   ),
@@ -176,7 +171,7 @@ class CarDetailsPage extends ConsumerWidget {
                     width: 15,
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 10, right: 10),
+                    padding: const EdgeInsets.only(left: 10, right: 10),
                     height: 60,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
@@ -207,10 +202,18 @@ class CarDetailsPage extends ConsumerWidget {
                       const SizedBox(
                         width: 10,
                       ),
-                      Text(
-                        "Model:".toUpperCase(),
-                        style: const TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.w500),
+                      Expanded(
+                        child: Text(
+                          carDetailsModel.model,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          maxLines: 5,
+                          // Allows text to wrap into two lines if needed
+                          overflow: TextOverflow
+                              .ellipsis, // Adds ellipsis if the text overflows
+                        ),
                       ),
                     ],
                   ),
@@ -218,11 +221,11 @@ class CarDetailsPage extends ConsumerWidget {
                     width: 15,
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 10, right: 10),
+                    padding: const EdgeInsets.only(left: 10, right: 10),
                     height: 60,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Color(0xffDDF2FD),
+                      color: const Color(0xffDDF2FD),
                     ),
                     child: Center(
                         child: Row(

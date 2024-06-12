@@ -22,6 +22,7 @@ class NetworkService {
   static String API_GET_CAR_DATA = "/api/avto/getCarData";
   static String API_SEND_PINFL = "/api/avto/sendPinfll";
   static String API_GET_PINFL = "/api/avto/getPinfl";
+  static String API_GET_FULL_INFO = "/api/avto/getPinflFullInfo";
 
   /// request methods
   static Future<Map<String, dynamic>?> GET(
@@ -38,6 +39,7 @@ class NetworkService {
       logger.i("Get request statuscode ${response.statusCode}");
       return responseMap;
     } else {
+
       print("Mana o'sha: ${response.statusCode}");
     }
     return null;

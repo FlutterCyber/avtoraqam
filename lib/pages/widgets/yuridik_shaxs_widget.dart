@@ -14,7 +14,7 @@ class YuridikShaxsWidget extends StatelessWidget {
   final TextEditingController yuridikLettersController;
   final void Function(WidgetRef ref, BuildContext, String) getCarData;
 
-  YuridikShaxsWidget({
+  const YuridikShaxsWidget({super.key, 
     required this.context,
     required this.ref,
     required this.yuridikRegionNumberController,
@@ -65,6 +65,7 @@ class YuridikShaxsWidget extends StatelessWidget {
                   previousFocus: true,
                   currentFocus: FocusScope.of(context),
                 ),
+
                 _buildTextField(
                   controller: yuridikNumber2Controller,
                   hintText: "2",
@@ -122,8 +123,8 @@ class YuridikShaxsWidget extends StatelessWidget {
         SizedBox(
           height: 100,
           child: ref.watch(loadingProvider).isLoading
-              ? Center(child: const CircularProgressIndicator())
-              : SizedBox.shrink(),
+              ? const Center(child: CircularProgressIndicator())
+              : const SizedBox.shrink(),
         ),
         SizedBox(
           width: 200,
@@ -169,7 +170,7 @@ class YuridikShaxsWidget extends StatelessWidget {
     required FocusScopeNode currentFocus,
   }) {
     return SizedBox(
-      width: maxLength == 1 ? 30 : 90,
+      width: maxLength == 1 ? 30 : 100,
       child: Center(
         child: TextFormField(
           controller: controller,

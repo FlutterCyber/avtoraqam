@@ -16,7 +16,8 @@ class JismoniyShaxsWidget extends StatelessWidget {
   final TextEditingController lastLettersController;
   final void Function(WidgetRef, BuildContext, String numberType) getCarData;
 
-  JismoniyShaxsWidget({
+  const JismoniyShaxsWidget({
+    super.key,
     required this.context,
     required this.ref,
     required this.regionNumberController,
@@ -135,8 +136,8 @@ class JismoniyShaxsWidget extends StatelessWidget {
         SizedBox(
           height: 100,
           child: ref.watch(loadingProvider).isLoading
-              ? Center(child: const CircularProgressIndicator())
-              : SizedBox.shrink(),
+              ? const Center(child: CircularProgressIndicator())
+              : const SizedBox.shrink(),
         ),
         SizedBox(
           width: 200,
@@ -203,12 +204,14 @@ class JismoniyShaxsWidget extends StatelessWidget {
           inputFormatters: [
             LengthLimitingTextInputFormatter(maxLength),
             if (textInputType == TextInputType.text)
-              TextInputFormatter.withFunction((oldValue, newValue) {
-                return TextEditingValue(
-                  text: newValue.text.toUpperCase(),
-                  selection: newValue.selection,
-                );
-              }),
+              TextInputFormatter.withFunction(
+                (oldValue, newValue) {
+                  return TextEditingValue(
+                    text: newValue.text.toUpperCase(),
+                    selection: newValue.selection,
+                  );
+                },
+              ),
           ],
           onChanged: (value) {
             if (value.length == maxLength && nextFocus) {
